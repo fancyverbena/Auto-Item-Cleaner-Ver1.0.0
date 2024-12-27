@@ -3,17 +3,30 @@
     "header": {
       "name": "Auto Item Cleaner",
       "description": "Automatically removes dropped items",
-      "uuid": "37e41fca-22fa-4cb9-b9b4-145fd3dcbccd",
-      "version": [1, 0, 0],
-      "min_engine_version": [1, 21, 50]
+      "uuid": "b9a12345-6789-0123-4567-89abcdef0123",
+      "version": [ 1, 0, 0 ],
+      "min_engine_version": [ 1, 21, 50 ]
     },
     "modules": [
       {
+        "version": [ 1, 0, 0 ],
+        "type": "data",
+        "uuid": "e0a12345-6789-0123-4567-89abcdef0125",
+        "description": "data module"
+      },
+      {
+        "version": [ 1, 0, 0 ],
         "type": "script",
         "language": "javascript",
-        "uuid": "b6e4814e-e236-409d-a761-7a5fc2652487",
-        "version": [1, 0, 0],
-        "entry": "scripts/main.js"
+        "entry": "scripts/main.js",
+        "uuid": "c0a12345-6789-0123-4567-89abcdef0123",
+        "description": "script module"
+      }
+    ],
+    "dependencies": [
+      {
+        "module_name": "@minecraft/server",
+        "version": "2.0.0-alpha"
       }
     ]
   }

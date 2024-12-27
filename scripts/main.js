@@ -1,43 +1,34 @@
 import { world, system } from "@minecraft/server";
 
-// 設定（300秒 = 5分ごとに削除）
-const CLEANUP_INTERVAL = 300;
-let timer = 0;
+console.log("Script started!");
 
-system.runInterval(() => {
-    timer++;
-    
-    if (timer >= CLEANUP_INTERVAL) {
+// アイテムを削除する関数
+function cleanItems() {
+    console.log("Cleaning items...");
+    try {
+        const overworld = world.getDimension("overworld");
         let itemsRemoved = 0;
-        
-        // ワールド内のすべてのアイテムエンティティを取得
-        for (const item of world.getDimension("overworld").getEntities({ type: "item" })) {
+
+        // アイテムを検索して削除
+        const entities = overworld.getEntities({ type: "minecraft:item" });
+        for (const entity of entities) {
+            entity.kill();  // エンティティを削除
             itemsRemoved++;
-            item.kill();
         }
-        
+
+        console.log(`Found and deleted ${itemsRemoved} items.`);
+
+        // 結果を通知
         if (itemsRemoved > 0) {
-            // メッセージ送信（赤色で表示）
-            world.sendMessage({
-                "rawtext": [
-                    {
-                        "text": "§c[Item Cleaner] ",
-                    },
-                    {
-                        "text": `Removed ${itemsRemoved} items from the ground!`
-                    }
-                ]
-            });
-            
-            // 削除時の効果音を再生
-            for (const player of world.getAllPlayers()) {
-                player.playSound("random.orb", {
-                    pitch: 1.0,
-                    volume: 1.0
-                });
-            }
+            overworld.runCommand(`tellraw Removed ${itemsRemoved} items from the ground!`);
         }
-        
-        timer = 0;
+    } catch (e) {
+        console.log(`Error: ${e}`);
     }
-}, 20);
+}
+
+// 1分ごとの自動クリーン
+system.runInterval(() => {
+    console.log("Running scheduled clean...");
+    cleanItems();
+}, 600); // 600 ticks = 30 seconds
