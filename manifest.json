@@ -1,0 +1,19 @@
+{
+    "format_version": 2,
+    "header": {
+      "name": "Auto Item Cleaner",
+      "description": "Automatically removes dropped items",
+      "uuid": "37e41fca-22fa-4cb9-b9b4-145fd3dcbccd",
+      "version": [1, 0, 0],
+      "min_engine_version": [1, 21, 50]
+    },
+    "modules": [
+      {
+        "type": "script",
+        "language": "javascript",
+        "uuid": "b6e4814e-e236-409d-a761-7a5fc2652487",
+        "version": [1, 0, 0],
+        "entry": "scripts/main.js"
+      }
+    ]
+  }
